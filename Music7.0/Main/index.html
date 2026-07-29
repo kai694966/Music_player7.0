@@ -12,6 +12,264 @@
 
 <p>v7.0 *2</p>
 
+<button id="readFolder">Load</button>
+<button id="selectFolder">Select folder</button>
+<br>
+<p id="folderLoad">Load folder to start...</p>
 
-    </body>
+<p id="clock"></p>
+<label for="volumeBar">Volume</label>
+<input type="range" id="volumeBar" min="0" max="100" step="0.1" value="10">
+<input type="number" id="volumeInput" min="0" max="100" step="0.1" value="10">
+
+<label for="muteCheckBox">Mute</label>
+
+<input type="checkbox" id="muteCheckBox" disabled="true">
+
+<p id="volume">volume</p>
+
+
+<button onclick="settingDialog.showModal()" id="configSettings">Settings</button>
+
+<dialog id="settingDialog" class="dialog">
+    <input type="checkbox" id="sceneSelectBool">
+    <label for="sceneSelectBool">SceneSelect</label>
+    <br>
+
+    <input type="checkbox" id="timeSignalBool">
+    <label for="timeSignalBool">timeSignal</label>
+    <br>
+
+    <input type="checkbox" id="bgmBool">
+    <label for="bgmBool">BGM</label>
+    <br>
+    <br>
+
+    <input type="number" min="0" max="12" value="0" id="sceneSelectRange">
+    <label for="sceneSelectRange">Hours | Songs within this range will be played</label>
+    <br>
+
+    <input type="number" min="-12" max="14" value="9" id="timeZone">
+    <label for="timeZone">Hours | Timezone</label>
+    <br>
+
+    <input type="number" min="0" max="3600" value="60" id="betweenSong">
+    <label for="betweenSong">Seconds | BGM between songs</label>
+    <br>
+
+    <input type="number" min="0" max="3600" value="10" id="leastToSignal">
+    <label for="leastToSignal">Seconds | Time between songs and time signal</label>
+    <br>
+
+    <input type="number" min="0" max="100" value="0" id="leastPlayed">
+    <label for="leastPlayed">Times | Allow playing songs which has played below this time(s) from minimum</label>
+    <br>
+
+    <input type="number" min="0" max="2880" value="60" id="timeBetweenPlay">
+    <label for="timeBetweenPlay">Minutes | Time required to play same songs</label>
+    <br>
+    <br>
+
+    <input type="checkbox" id="sleepMode">
+    <label for="sleepMode">Sleep mode</label>
+    <input type="number" id="sleepModeInput" min="0" max="1440" value="60">
+    <br>
+
+    <input type="checkbox" id="stopMode">
+    <label for="stopMode">Stop mode</label>
+    <input type="number" id="stopModeInput" min="0" max="1440" value="30">
+    <br>
+    <br>
+
+    <input type="checkbox" id="weatherInternet" checked>
+    <label for="weatherInternet">🌐 | Weather</label>
+    <select id="weatherInput" name="weather">
+        <option value="0">None</option>
+        <option value="1">Clear</option>
+        <option value="2">Clouds</option>
+        <option value="3">Rain</option>
+        <option value="4">Snow</option>
+    </select>
+    <br>
+
+    <input type="checkbox" id="speedInternet">
+    <label for="speedInternet">🌐 | Speed</label>
+    <input type="number" id="speedInput" min="0" max="2550" value="0">
+    <br>
+
+    <button onclick="saveSetting()" id="saveSettingJson">Save</button>
+    <br>
+
+    <button onclick="settingDialog.close()">close</button>
+
+</dialog>
+
+<button onclick="filterDialog.showModal()" id="configSettings">Filters</button>
+
+<dialog id="filterDialog" class="dialog">
+    <p>Cover</p>
+    <input type="radio" id="coverN" value="none" name="cover" checked>
+    <label for="coverN">Any</label>
+    <input type="radio" id="coverB" value="black" name="cover">
+    <label for="coverB">Black list</label>
+    <br>
+    <input type="radio" id="coverW" value="white" name="cover">
+    <label for="coverW">White list</label>
+    <br>
+    <textarea id="coverTextarea" name="coverTextarea" rows="5" cols="40"></textarea>
+    <br>
+
+    <p>Original</p>
+    <input type="radio" id="originalN" value="none" name="original" checked>
+    <label for="originalN">Any</label>
+    <br>
+    <input type="radio" id="originalB" value="black" name="original">
+    <label for="originalB">Black list</label>
+    <br>
+    <input type="radio" id="originalW" value="white" name="original">
+    <label for="originalW">White list</label>
+    <br>
+    <textarea id="originalTextarea" name="originalTextarea" rows="5" cols="40"></textarea>
+    <br>
+
+    <p>Registered</p>
+    <input type="radio" id="RegisteredN" value="none" name="Registered" checked>
+    <label for="RegisteredN">Any</label>
+    <br>
+    <input type="radio" id="RegisteredL" value="block" name="Registered">
+    <label for="RegisteredL">Input</label>
+    <br>
+    <input type="text" minlength="8" maxlength="8" id="RegisteredStart">
+    <p>~</p>
+    <input type="text" minlength="8" maxlength="8" id="RegisteredEnd">
+
+    <p>Duration</p>
+    <input type="radio" id="DurationN" value="none" name="Duration" checked>
+    <label for="DurationN">Any</label>
+    <br>
+    <input type="radio" id="DurationL" value="block" name="Duration">
+    <label for="DurationL">Input</label>
+    <br>
+    <input type="text" minlength="8" maxlength="8" id="DurationStart">
+    <p>~</p>
+    <input type="text" minlength="8" maxlength="8" id="DurationEnd">
+    
+    <p>Language</p>
+    <input type="radio" id="languageN" value="none" name="language" checked>
+    <label for="languageN">Any</label>
+    <br>
+    <input type="radio" id="languageB" value="black" name="language">
+    <label for="languageB">Black list</label>
+    <br>
+    <input type="radio" id="languageW" value="white" name="language">
+    <label for="languageW">White list</label>
+    <br>
+    <textarea id="languageTextarea" name="languageTextarea" rows="5" cols="40"></textarea>
+    <br>
+
+    
+    <p>Selection</p>
+    <input type="radio" id="selectionN" value="none" name="selection" checked>
+    <label for="selectionN">Any</label>
+    <br>
+    <input type="radio" id="selectionB" value="black" name="selection">
+    <label for="selectionB">Black list</label>
+    <br>
+    <input type="radio" id="selectionW" value="white" name="selection">
+    <label for="selectionW">White list</label>
+    <br>
+    <textarea id="selectionTextarea" name="selectionTextarea" rows="5" cols="40"></textarea>
+    <br>
+
+    <br>
+    <button onclick="filterDialog.close()">close</button>
+
+</dialog>
+
+<button id="startButton">Start</button>
+<p id="nowPlaying" stype="font-weight: bold;">nowPlaying</p>
+
+<audio id="audioPlayerM" controls style="display:none;">audioM</audio>
+<video id="videoPlayerM" controls width="480" style="display:none;">videoM</video>
+
+<audio id="audioPlayerJ" controls style="display: none;">audioJ</audio>
+<video id="videoPlayerJ" controls width="480" style="display: none;">videoJ</video>
+
+<audio id="audioPlayerB" controls style="display:none;">audioB</audio>
+<video id="videoPlayerB" controls width="480" style="display:none;">videoB</video>
+
+<audio id="SE_Audio" controls style="display: none;"></audio>
+<br>
+
+<p id="sleepModeMessage"></p>
+<p id="stopModeMessage"></p>
+
+<button onclick="fileDialog.showModal()" id="showProperty">show file property</button>
+
+<dialog id="fileDialog" class="dialog">
+    <h2 id="pathDialog">path:</h2>
+    <p id="nameDialog">name:</p>
+    <p id="coverDialog">cover:</p>
+    <p id="originalDialog">original:</p>
+    <p id="timeDialog">time:</p>
+    <p id="signalDialog">signal:</p>
+    <p id="travelDialog">travel:</p>
+    <p id="travelOnlyDialog">travelOnly:</p>
+    <p id="weatherDialog">weather:</p>
+    <p id="durationDialog">duration:</p>
+    <p id="registeredDialog">registered:</p>
+    <p id="languageDialog">language:</p>
+    <p id="playedDialog">played:</p>
+    <a id="sourceDialog" href=""></a>
+    <br>
+    <button onclick="fileDialog.close()">close</button>
+</dialog>
+
+<br>
+
+<p id="weatherNow"></p>
+
+<button onclick="weatherDetailDialog.showModal()" id="showProperty">Show weather details</button>
+
+<dialog id="weatherDetailDialog" class="dialog">
+    <h2 id="w_name">city:</h2>
+    <p id="w_coord">coord: </p>
+    <p id="w_weather">weather: </p>
+    <p id="w_base">base: </p>
+    <p id="w_main">main: </p>
+    <p id="w_visibility">visibility: </p>
+    <p id="w_wind">wind: </p>
+    <p id="w_rain">rain: </p>
+    <p id="w_clouds">clouds: </p>
+    <p id="w_dt">dt: </p>
+    <p id="w_sys">sys: </p>
+    <p id="w_timezone">timezone: </p>
+    <p id="w_id">id: </p>
+    <p id="w_cod">cod: </p>
+    <br>
+    <button onclick="weatherDetailDialog.close()">close</button>
+</dialog>
+
+<button id="setApiKey">Set API key</button>
+
+<script>
+    // Close modal dialogs when their backdrop (outside the dialog content) is clicked.
+    document.querySelectorAll('dialog').forEach((dialog) => {
+        dialog.addEventListener('click', (event) => {
+            const bounds = dialog.getBoundingClientRect();
+            const clickedOutside =
+                event.clientX < bounds.left || event.clientX > bounds.right ||
+                event.clientY < bounds.top || event.clientY > bounds.bottom;
+
+            if (clickedOutside) {
+                dialog.close();
+            }
+        });
+    });
+</script>
+
+</body>
+
+
+
 </html>
