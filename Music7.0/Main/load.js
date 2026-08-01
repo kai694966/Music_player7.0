@@ -1,3 +1,5 @@
+const selectFolderE = document.getElementById("selectFolder")
+
 const folderDatabase = new DB("Music7", 1, {
     InputFolderPath: "id",
 });
