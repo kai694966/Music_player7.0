@@ -1,5 +1,4 @@
-const timezone = document.getElementById("timezone")
-const clock = document.getElementById("clock")
+
 
 function newDate() {
     const now = new Date()
