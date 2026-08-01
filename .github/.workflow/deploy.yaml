@@ -1,0 +1,3 @@
+- name: Generate version.js
+  run: |
+    echo "const GIT_VERSION = '$(git rev-parse --short=7 HEAD)';" > version.js
