@@ -1,3 +1,5 @@
+const githubVersion = document.getElementById("githubVersion")
+
 const load = document.getElementById("readFolder")
 const selectFolder = document.getElementById("selectFolder")
 const loadStatus = document.getElementById("folderLoad")

@@ -1,0 +1,1 @@
+githubVersion.textContent = GIT_VERSION
