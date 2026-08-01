@@ -17,6 +17,14 @@
 <br>
 <p id="folderLoad">Load folder to start...</p>
 
+<dialog id="selectFolderDialog" class="dialog">
+    <p>Select folder from...</p>
+    <button id="selectFolderFromDb">registered</button>
+    <button id="selectFolderFromPicker">storage</buttion>
+    <button id="cancelSelectFolder">Cancel</button>
+    <div id="registeredFolderList"></div>
+</dialog>
+
 <p id="clock"></p>
 <label for="volumeBar">Volume</label>
 <input type="range" id="volumeBar" min="0" max="100" step="0.1" value="10">
@@ -49,8 +57,8 @@
     <label for="sceneSelectRange">Hours | Songs within this range will be played</label>
     <br>
 
-    <input type="number" min="-12" max="14" value="9" id="timeZone">
-    <label for="timeZone">Hours | Timezone</label>
+    <input type="number" min="-12" max="14" value="9" id="timezone">
+    <label for="timezone">Hours | Timezone</label>
     <br>
 
     <input type="number" min="0" max="3600" value="60" id="betweenSong">
@@ -71,12 +79,12 @@
     <br>
 
     <input type="checkbox" id="sleepMode">
-    <label for="sleepMode">Sleep mode</label>
+    <label for="sleepModeBool">Sleep mode</label>
     <input type="number" id="sleepModeInput" min="0" max="1440" value="60">
     <br>
 
-    <input type="checkbox" id="stopMode">
-    <label for="stopMode">Stop mode</label>
+    <input type="checkbox" id="stopModeBool">
+    <label for="stopModeBool">Stop mode</label>
     <input type="number" id="stopModeInput" min="0" max="1440" value="30">
     <br>
     <br>
@@ -252,21 +260,12 @@
 
 <button id="setApiKey">Set API key</button>
 
-<script>
-    // Close modal dialogs when their backdrop (outside the dialog content) is clicked.
-    document.querySelectorAll('dialog').forEach((dialog) => {
-        dialog.addEventListener('click', (event) => {
-            const bounds = dialog.getBoundingClientRect();
-            const clickedOutside =
-                event.clientX < bounds.left || event.clientX > bounds.right ||
-                event.clientY < bounds.top || event.clientY > bounds.bottom;
 
-            if (clickedOutside) {
-                dialog.close();
-            }
-        });
-    });
-</script>
+<script src="common.js"></script>
+<script src="db.js"></script>
+<script src="load.js"></script>
+<script src="closeDialog.js"></script>
+<script src="clock.js"></script>
 
 </body>
 
