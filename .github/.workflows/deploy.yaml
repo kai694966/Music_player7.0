@@ -1,10 +1,39 @@
-- name: Generate version.js
-  run: |
-    echo "const GIT_VERSION = '$(git rev-parse --short=7 HEAD)';" > version.js
-
-  name: Deploy GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
     branches:
       - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Generate version.js
+        run: |
+          echo "const GIT_VERSION = '$(git rev-parse --short=7 HEAD)';" > version.js
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
