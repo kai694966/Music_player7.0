@@ -26,6 +26,11 @@ jobs:
         run: |
           echo "const GIT_VERSION = '$(git rev-parse --short=7 HEAD)';" > version.js
 
+      - name: Check version.js
+        run: |
+          ls -l version.js
+          cat version.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -37,19 +42,3 @@ jobs:
       - name: Deploy GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-
-
-      - name: Generate version.js
-        run: |
-          echo "HEAD:"
-          git rev-parse HEAD
-          echo "SHORT:"
-          git rev-parse --short=7 HEAD
-          echo "Generate:"
-          echo "const GIT_VERSION = '$(git rev-parse --short=7 HEAD)';" > version.js
-      
-      - name: Check version.js
-        run: |
-          ls -l version.js
-          cat version.js
