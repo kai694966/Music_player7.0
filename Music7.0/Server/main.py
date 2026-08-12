@@ -4,6 +4,7 @@ import init_db
 import dbname
 import download
 import download_url_writer
+import enter_data
 
 
 
@@ -25,6 +26,7 @@ if __name__ == "__main__":
     mode = input("\n\n\
 1:Download audio/video\n\
 2:Watch clipboard\n\
+3:Enter metadata\n\
 \n>>")
 
     mode = int(mode)
@@ -36,3 +38,5 @@ if __name__ == "__main__":
         download.download(output_base,txtfile)
     elif mode == 2:
         download_url_writer.watch_clipboard(txtfile)
+    elif mode == 3:
+        enter_data.enter()
